@@ -15,13 +15,12 @@ type CharityPayload = record {
   name : text;
   location : text;
 };
-type DonationPayload = record { amount : float64; charityId : text };
 type _AzleResult = variant { Ok : Charity; Err : text };
 type _AzleResult_1 = variant { Ok : vec Charity; Err : text };
 service : () -> {
   createCharity : (CharityPayload) -> (_AzleResult);
   deleteCharity : (text) -> (_AzleResult);
-  donateToCharity : (DonationPayload) -> (_AzleResult);
+  donateToCharity : (text, float64) -> (_AzleResult);
   getAllCharities : () -> (_AzleResult_1) query;
   getCharity : (text) -> (_AzleResult) query;
   updateCharity : (text, CharityPayload) -> (_AzleResult);
