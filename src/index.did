@@ -1,0 +1,28 @@
+type Charity = record {
+  id : text;
+  member : text;
+  donors : vec principal;
+  logoImage : text;
+  name : text;
+  createdAt : nat64;
+  fundAvailable : float64;
+  updatedAt : opt nat64;
+  location : text;
+};
+type CharityPayload = record {
+  member : text;
+  logoImage : text;
+  name : text;
+  location : text;
+};
+type DonationPayload = record { amount : float64; charityId : text };
+type _AzleResult = variant { Ok : Charity; Err : text };
+type _AzleResult_1 = variant { Ok : vec Charity; Err : text };
+service : () -> {
+  createCharity : (CharityPayload) -> (_AzleResult);
+  deleteCharity : (text) -> (_AzleResult);
+  donateToCharity : (DonationPayload) -> (_AzleResult);
+  getAllCharities : () -> (_AzleResult_1) query;
+  getCharity : (text) -> (_AzleResult) query;
+  updateCharity : (text, CharityPayload) -> (_AzleResult);
+}
